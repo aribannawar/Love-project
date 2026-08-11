@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- =====================================================
+         DOCUMENT SETTINGS
+         ===================================================== -->
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#151412"
+    >
+
+    <meta
+        name="description"
+        content="A little trip back through old memories."
+    >
+
+    <title>Old Memories ✦</title>
+
+
+    <!-- =====================================================
+         GLOBAL STYLES
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/global.css"
+    >
+
+
+    <!-- =====================================================
+         MEMORY STYLES
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/memory.css"
+    >
+
+</head>
+
+
+<body>
+
+    <!-- =====================================================
+         MEMORY APPLICATION
+         ===================================================== -->
+
+    <main
+        class="memory"
+        id="memory"
+    >
+
+
+        <!-- =================================================
+             MAIN CONTAINER
+             ================================================= -->
+
+        <div class="memory-container">
+
+
+            <!-- =================================================
+                 HEADER
+                 ================================================= -->
+
+            <header class="memory-header">
+
+                <span class="memory-label">
+                    A LITTLE TRIP BACK IN TIME
+                </span>
+
+
+                <h1 class="memory-title">
+
+                    Let's test some old
+                    <br>
+
+                    memories
+
+                    <em>
+                        If you remember 🌚
+                    </em>
+
+                </h1>
+
+
+                <p class="memory-subtitle">
+
+                    11 questions from the days when we had
+                    just met and started becoming friends.
+                    Let's see how much you still remember. 💝
+
+                </p>
+
+
+                <div class="memory-era">
+
+                    <span></span>
+
+                    <small>
+                        OLD MEMORIES • 2023 — 2026
+                    </small>
+
+                    <span></span>
+
+                </div>
+
+            </header>
+
+
+            <!-- =================================================
+                 PROGRESS
+                 ================================================= -->
+
+            <div
+                class="memory-progress"
+                aria-label="Memory test progress"
+            >
+
+                <div
+                    class="memory-progress-track"
+                    aria-hidden="true"
+                >
+
+                    <div
+                        class="memory-progress-bar"
+                        id="memoryProgressBar"
+                    ></div>
+
+                </div>
+
+
+                <span
+                    class="memory-progress-text"
+                    id="memoryProgressText"
+                >
+                    01 / 11
+                </span>
+
+            </div>
+
+
+            <!-- =================================================
+                 QUESTION CARD
+                 ================================================= -->
+
+            <section
+                class="memory-card"
+                id="memoryCard"
+            >
+
+
+                <!-- QUESTION NUMBER -->
+
+                <div
+                    class="memory-number"
+                    id="memoryNumber"
+                >
+                    QUESTION 1 OF 11
+                </div>
+
+
+                <!-- QUESTION -->
+
+                <h2
+                    class="memory-question"
+                    id="memoryQuestion"
+                >
+                    How we were introduced first day?
+                </h2>
+
+
+                <!-- ANSWERS -->
+
+                <div
+                    class="memory-answers"
+                    id="memoryAnswers"
+                >
+
+                    <!--
+                        memory.js creates
+                        the answer buttons here.
+                    -->
+
+                </div>
+
+
+                <!-- FEEDBACK -->
+
+                <div
+                    class="memory-feedback"
+                    id="memoryFeedback"
+                    aria-live="polite"
+                ></div>
+
+
+                <!-- NEXT -->
+
+                <button
+                    class="memory-next"
+                    id="memoryNext"
+                    type="button"
+                >
+
+                    Next Memory
+
+                    <span aria-hidden="true">
+                        →
+                    </span>
+
+                </button>
+
+            </section>
+
+
+            <!-- =================================================
+                 COMPLETION CARD
+                 ================================================= -->
+
+            <section
+                class="memory-complete"
+                id="memoryComplete"
+                aria-live="polite"
+            >
+
+                <div
+                    class="memory-complete-icon"
+                    aria-hidden="true"
+                >
+                    ✦
+                </div>
+
+
+                <h2 class="memory-complete-title">
+                    You remember more than I expected. 🌚
+                </h2>
+
+
+                <p class="memory-complete-message">
+
+                    11 old questions.
+
+                    <br>
+
+                    11 little pieces of the beginning.
+
+                    <br>
+
+                    Some memories fade.
+
+                    Some somehow stay forever. 💝
+
+                </p>
+
+
+                <div
+                    class="memory-score"
+                    id="memoryScore"
+                >
+                    11 / 11
+                </div>
+
+
+                <button
+                    class="memory-continue"
+                    id="memoryContinue"
+                    type="button"
+                >
+
+                    Continue the journey
+
+                    <span aria-hidden="true">
+                        →
+                    </span>
+
+                </button>
+
+            </section>
+
+
+        </div>
+
+
+        <!-- =================================================
+             CINEMATIC HUD
+             ================================================= -->
+
+        <div
+            class="memory-mark top-left"
+            aria-hidden="true"
+        >
+            MEMORY // 04
+        </div>
+
+
+        <div
+            class="memory-mark top-right"
+            aria-hidden="true"
+        >
+            ARCHIVE // OPEN
+        </div>
+
+
+        <div
+            class="memory-mark bottom-left"
+            aria-hidden="true"
+        >
+            SOMEWHERE IN TIME
+        </div>
+
+
+        <div
+            class="memory-mark bottom-right"
+            aria-hidden="true"
+        >
+            04 / 06
+        </div>
+
+
+    </main>
+
+
+    <!-- =====================================================
+         MEMORY JAVASCRIPT
+         ===================================================== -->
+
+    <script
+        src="js/memory.js"
+        defer
+    ></script>
+
+</body>
+
+</html>

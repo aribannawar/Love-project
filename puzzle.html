@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- =====================================================
+         DOCUMENT SETTINGS
+         ===================================================== -->
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#02030a"
+    >
+
+    <meta
+        name="description"
+        content="An interactive memory puzzle."
+    >
+
+    <title>Memory Puzzle ✦</title>
+
+
+    <!-- =====================================================
+         GLOBAL STYLES
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/global.css"
+    >
+
+
+    <!-- =====================================================
+         PUZZLE STYLES
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/puzzle.css"
+    >
+
+</head>
+
+
+<body>
+
+    <!-- =====================================================
+         PUZZLE APPLICATION
+         ===================================================== -->
+
+    <main
+        class="puzzle"
+        id="puzzle"
+    >
+
+
+        <!-- =================================================
+             HEADER
+             ================================================= -->
+
+        <div class="puzzle-container">
+
+            <header class="puzzle-header">
+
+                <span class="puzzle-label">
+                    MEMORY // PUZZLE
+                </span>
+
+
+                <h1 class="puzzle-title">
+                    One little challenge
+                </h1>
+
+
+                <p class="puzzle-subtitle">
+
+                    A few clues.
+
+                    A few memories.
+
+                    And one final piece waiting
+                    at the end.
+
+                </p>
+
+            </header>
+
+
+            <!-- =============================================
+                 PROGRESS
+                 ============================================= -->
+
+            <div
+                class="puzzle-progress"
+                aria-label="Puzzle progress"
+            >
+
+                <div
+                    class="puzzle-progress-track"
+                    aria-hidden="true"
+                >
+
+                    <div
+                        class="puzzle-progress-bar"
+                        id="puzzleProgressBar"
+                    ></div>
+
+                </div>
+
+
+                <span
+                    class="puzzle-progress-text"
+                    id="puzzleProgressText"
+                >
+                    01 / 03
+                </span>
+
+            </div>
+
+
+            <!-- =============================================
+                 PUZZLE CARD
+                 ============================================= -->
+
+            <section
+                class="puzzle-card"
+                id="puzzleCard"
+            >
+
+
+                <!-- =========================================
+                     QUESTION NUMBER
+                     ========================================= -->
+
+                <div
+                    class="puzzle-number"
+                    id="puzzleNumber"
+                >
+                    01
+                </div>
+
+
+                <!-- =========================================
+                     QUESTION
+                     ========================================= -->
+
+                <h2
+                    class="puzzle-question"
+                    id="puzzleQuestion"
+                >
+                    What makes an ordinary moment
+                    become a special memory?
+                </h2>
+
+
+                <!-- =========================================
+                     ANSWERS
+                     ========================================= -->
+
+                <div
+                    class="puzzle-answers"
+                    id="puzzleAnswers"
+                >
+
+                    <!--
+                        puzzle.js will populate
+                        the answer buttons here.
+                    -->
+
+                </div>
+
+
+                <!-- =========================================
+                     FEEDBACK
+                     ========================================= -->
+
+                <div
+                    class="puzzle-feedback"
+                    id="puzzleFeedback"
+                    aria-live="polite"
+                ></div>
+
+
+                <!-- =========================================
+                     NEXT BUTTON
+                     ========================================= -->
+
+                <button
+                    class="btn btn-primary puzzle-next"
+                    id="puzzleNext"
+                    type="button"
+                >
+
+                    Continue
+
+                    <span aria-hidden="true">
+                        →
+                    </span>
+
+                </button>
+
+            </section>
+
+
+            <!-- =============================================
+                 COMPLETION CARD
+                 ============================================= -->
+
+            <section
+                class="puzzle-complete"
+                id="puzzleComplete"
+                aria-live="polite"
+            >
+
+
+                <div
+                    class="puzzle-complete-icon"
+                    aria-hidden="true"
+                >
+                    ✦
+                </div>
+
+
+                <h2 class="puzzle-complete-title">
+                    You solved it.
+                </h2>
+
+
+                <p class="puzzle-complete-message">
+
+                    Every answer unlocked another
+                    little piece of the story.
+
+                    <br>
+
+                    But there's still one more
+                    place to go.
+
+                </p>
+
+
+                <button
+                    class="btn btn-primary"
+                    id="puzzleContinue"
+                    type="button"
+                >
+
+                    Continue the journey
+
+                    <span aria-hidden="true">
+                        →
+                    </span>
+
+                </button>
+
+            </section>
+
+
+        </div>
+
+
+        <!-- =================================================
+             HUD
+             ================================================= -->
+
+        <div
+            class="intro-hud top-left"
+            aria-hidden="true"
+        >
+            MEMORY // 03
+        </div>
+
+
+        <div
+            class="intro-hud top-right"
+            aria-hidden="true"
+        >
+            PUZZLE ONLINE
+        </div>
+
+
+        <div
+            class="intro-hud bottom-left"
+            aria-hidden="true"
+        >
+            SIGNAL // STABLE
+        </div>
+
+
+        <div
+            class="intro-hud bottom-right"
+            aria-hidden="true"
+        >
+            03 / 06
+        </div>
+
+
+    </main>
+
+
+    <!-- =====================================================
+         PUZZLE JAVASCRIPT
+         ===================================================== -->
+
+    <script
+        src="js/puzzle.js"
+        defer
+    ></script>
+
+</body>
+
+</html>

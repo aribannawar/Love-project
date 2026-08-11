@@ -1,0 +1,2378 @@
+/* =========================================================
+   BOOK EXPERIENCE — 3D NEON MEMORY BOOK
+   FINAL MOBILE UI
+   ========================================================= */
+
+:root {
+    --book-width: min(88vw, 590px);
+    --book-height: min(125vw, 760px);
+
+    --page-bg: #f7f4ed;
+    --page-text: #1c1a20;
+
+    --neon-cyan: #00eaff;
+    --neon-purple: #9b5cff;
+    --neon-pink: #ff38c7;
+    --neon-blue: #438cff;
+
+    --page-duration: 1.05s;
+    --page-ease: cubic-bezier(.22, .72, .18, 1);
+}
+
+
+/* =========================================================
+   GLOBAL
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    min-height: 100%;
+}
+
+body {
+    background:
+        radial-gradient(
+            circle at 50% 42%,
+            rgba(55, 91, 145, .16),
+            transparent 42%
+        ),
+        radial-gradient(
+            circle at 20% 80%,
+            rgba(0, 234, 255, .07),
+            transparent 30%
+        ),
+        #02050b;
+
+    color: white;
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   MAIN EXPERIENCE
+   ========================================================= */
+
+.book-experience {
+    width: 100%;
+    min-height: 100vh;
+
+    padding:
+        54px
+        20px
+        80px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.book-header {
+    width: min(94vw, 760px);
+
+    text-align: center;
+
+    margin-bottom: 28px;
+
+    position: relative;
+
+    z-index: 50;
+}
+
+.book-label {
+    display: block;
+
+    margin-bottom: 13px;
+
+    color:
+        rgba(0, 234, 255, .78);
+
+    font-size: 11px;
+
+    letter-spacing: .42em;
+
+    text-transform: uppercase;
+
+    text-shadow:
+        0 0 8px
+        rgba(0, 234, 255, .45);
+}
+
+.book-header h1 {
+    margin: 0;
+
+    font-size:
+        clamp(29px, 7vw, 58px);
+
+    line-height: 1.04;
+
+    font-weight: 800;
+
+    letter-spacing: -.045em;
+}
+
+.book-header h1 span {
+    background:
+        linear-gradient(
+            90deg,
+            var(--neon-cyan),
+            var(--neon-blue),
+            var(--neon-purple),
+            var(--neon-pink)
+        );
+
+    background-size:
+        300% 100%;
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    color: transparent;
+
+    animation:
+        neonTextFlow 5s linear infinite;
+}
+
+.book-header p {
+    margin: 15px 0 0;
+
+    color:
+        rgba(255, 255, 255, .55);
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   BOOK STAGE
+   ========================================================= */
+
+.book-stage {
+    width: 100%;
+
+    min-height:
+        calc(var(--book-height) + 120px);
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    position: relative;
+
+    perspective: 1800px;
+
+    perspective-origin:
+        center center;
+}
+
+
+/* =========================================================
+   BOOK GLOW
+   ========================================================= */
+
+.book-glow {
+    position: absolute;
+
+    width: 82%;
+    height: 80%;
+
+    top: 8%;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(0, 234, 255, .15),
+            rgba(126, 64, 255, .09) 34%,
+            transparent 70%
+        );
+
+    filter: blur(42px);
+
+    pointer-events: none;
+
+    animation:
+        bookGlowPulse
+        4s
+        ease-in-out
+        infinite;
+}
+
+
+/* =========================================================
+   BOOK
+   ========================================================= */
+
+.book {
+    width:
+        var(--book-width);
+
+    height:
+        var(--book-height);
+
+    position: relative;
+
+    transform-style:
+        preserve-3d;
+
+    transform:
+        translateZ(0)
+        rotateX(0deg);
+
+    transition:
+        transform .8s ease;
+
+    filter:
+        drop-shadow(
+            0 28px 35px
+            rgba(0, 0, 0, .48)
+        )
+        drop-shadow(
+            0 0 18px
+            rgba(0, 234, 255, .08)
+        );
+}
+
+
+/* =========================================================
+   BOOK EDGE
+   ========================================================= */
+
+.book::after {
+    content: "";
+
+    position: absolute;
+
+    right: -15px;
+    top: 8px;
+
+    width: 15px;
+
+    height:
+        calc(100% - 16px);
+
+    border-radius:
+        0 9px 9px 0;
+
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            #d5d1c9 0px,
+            #d5d1c9 3px,
+            #aaa69f 4px,
+            #eeeae1 6px
+        );
+
+    box-shadow:
+        4px 0 12px
+        rgba(0, 0, 0, .35);
+
+    transform:
+        translateZ(-3px);
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   BASE PAGE
+   ========================================================= */
+
+.book-page,
+.book-cover {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    border-radius: 13px;
+
+    transform-origin:
+        left center;
+
+    transform-style:
+        preserve-3d;
+
+    backface-visibility:
+        hidden;
+
+    -webkit-backface-visibility:
+        hidden;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   LEFT PAGE
+   ========================================================= */
+
+.left-page {
+    z-index: 2;
+
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(164, 124, 255, .08),
+            transparent 35%
+        ),
+        var(--page-bg);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, .75);
+
+    box-shadow:
+        inset 0 0 35px
+        rgba(0, 0, 0, .06);
+}
+
+
+/* =========================================================
+   COVER
+   ========================================================= */
+
+.book-cover {
+    z-index: 40;
+
+    background:
+        radial-gradient(
+            circle at 35% 20%,
+            rgba(155, 92, 255, .35),
+            transparent 34%
+        ),
+        radial-gradient(
+            circle at 80% 80%,
+            rgba(0, 234, 255, .16),
+            transparent 38%
+        ),
+        linear-gradient(
+            135deg,
+            #08071b,
+            #15103c 48%,
+            #080919
+        );
+
+    border:
+        1px solid
+        rgba(255, 255, 255, .24);
+
+    box-shadow:
+        inset 0 0 55px
+        rgba(114, 67, 255, .15),
+        0 0 22px
+        rgba(91, 55, 255, .18);
+
+    cursor: pointer;
+
+    transition:
+        box-shadow .4s ease;
+}
+
+.book-cover:hover {
+    box-shadow:
+        inset 0 0 65px
+        rgba(114, 67, 255, .2),
+        0 0 30px
+        rgba(0, 234, 255, .18);
+}
+
+.cover-inner {
+    height: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    padding: 35px;
+}
+
+.cover-small {
+    color:
+        var(--neon-cyan);
+
+    font-size: 11px;
+
+    letter-spacing: .42em;
+
+    text-shadow:
+        0 0 12px
+        rgba(0, 234, 255, .55);
+}
+
+.cover-inner h2 {
+    margin: 24px 0 10px;
+
+    font-size:
+        clamp(52px, 13vw, 92px);
+
+    line-height: .9;
+
+    background:
+        linear-gradient(
+            90deg,
+            #fff,
+            #b99aff,
+            #ff59cf
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    color: transparent;
+}
+
+.cover-heart {
+    font-size: 52px;
+
+    margin: 8px 0 14px;
+
+    filter:
+        drop-shadow(
+            0 0 10px
+            rgba(255, 67, 111, .8)
+        );
+
+    animation:
+        heartBeat
+        1.8s
+        ease-in-out
+        infinite;
+}
+
+.cover-inner p {
+    color:
+        rgba(255, 255, 255, .68);
+
+    font-size: 15px;
+}
+
+.cover-signature {
+    margin-top: 20px;
+
+    font-size: 30px;
+}
+
+
+/* =========================================================
+   PHOTO PAGES
+   ========================================================= */
+
+.photo-page {
+    z-index: 10;
+
+    padding: 24px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fffefa,
+            #f2eee5
+        );
+
+    color:
+        var(--page-text);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, .9);
+
+    box-shadow:
+        inset 0 0 30px
+        rgba(0, 0, 0, .05),
+        0 4px 12px
+        rgba(0, 0, 0, .18);
+
+    transition:
+        transform
+        var(--page-duration)
+        var(--page-ease),
+        box-shadow .5s ease;
+}
+
+
+/* =========================================================
+   PAGE STACK
+   ========================================================= */
+
+.page-1  { z-index: 30; }
+.page-2  { z-index: 29; }
+.page-3  { z-index: 28; }
+.page-4  { z-index: 27; }
+.page-5  { z-index: 26; }
+.page-6  { z-index: 25; }
+.page-7  { z-index: 24; }
+.page-8  { z-index: 23; }
+.page-9  { z-index: 22; }
+.page-10 { z-index: 21; }
+.page-11 { z-index: 20; }
+.page-12 { z-index: 19; }
+.page-13 { z-index: 18; }
+
+
+/* =========================================================
+   TURNED PAGE
+   ========================================================= */
+
+.book-page.page-turned,
+.book-cover.page-turned {
+    transform:
+        rotateY(-178deg);
+
+    pointer-events: none;
+
+    box-shadow:
+        inset -10px 0 18px
+        rgba(0, 0, 0, .18);
+}
+
+
+/* =========================================================
+   PHOTO FRAME
+   ========================================================= */
+
+.photo-frame {
+    width: 100%;
+
+    aspect-ratio: .82;
+
+    padding: 11px;
+
+    background: #fff;
+
+    border:
+        1px solid
+        rgba(0, 0, 0, .08);
+
+    box-shadow:
+        0 10px 20px
+        rgba(0, 0, 0, .13);
+
+    position: relative;
+}
+
+.photo-frame img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    background: #ddd;
+}
+
+
+/* =========================================================
+   PHOTO NUMBER
+   ========================================================= */
+
+.photo-number {
+    position: absolute;
+
+    right: 14px;
+    bottom: 14px;
+
+    min-width: 58px;
+
+    padding: 8px 12px;
+
+    text-align: center;
+
+    color: white;
+
+    background:
+        rgba(4, 16, 29, .82);
+
+    border:
+        1px solid
+        rgba(0, 234, 255, .35);
+
+    box-shadow:
+        0 0 12px
+        rgba(0, 234, 255, .12);
+
+    font-size: 15px;
+
+    letter-spacing: .12em;
+}
+
+
+/* =========================================================
+   CAPTION
+   ========================================================= */
+
+.photo-caption {
+    margin:
+        18px 0 0;
+
+    text-align: center;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-style: italic;
+
+    font-size:
+        clamp(16px, 4vw, 23px);
+
+    line-height: 1.35;
+
+    color:
+        #37323a;
+}
+
+
+/* =========================================================
+   FINAL PAGE
+   ========================================================= */
+
+.final-choice-page {
+    overflow: visible;
+}
+
+
+/*
+ * FINAL SPREAD:
+ *
+ * Page 12 = LEFT
+ * Page 13 = RIGHT
+ *
+ * Both remain inside the book.
+ */
+
+.book.final-spread {
+    width:
+        min(96vw, 1050px);
+
+    height:
+        min(112vw, 760px);
+
+    transition:
+        width .75s ease,
+        height .75s ease;
+}
+
+
+.book.final-spread
+.book-page:not(.page-12):not(.page-13) {
+
+    visibility: hidden;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   FINAL SPREAD PHOTOS
+   ========================================================= */
+
+.book.final-spread .photo-frame {
+    width: 100%;
+
+    aspect-ratio: .82;
+
+    max-height: 64%;
+
+    padding: 8px;
+
+    margin: 0 auto;
+}
+
+.book.final-spread .photo-caption {
+    margin-top: 13px;
+
+    font-size:
+        clamp(13px, 2.5vw, 20px);
+}
+
+
+/* =====================================================
+   FINAL PAGE — SEPARATE BUTTONS
+   ===================================================== */
+
+.flower-choice {
+    position: absolute;
+    z-index: 50;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    pointer-events: auto;
+}
+
+
+/* =====================================================
+   LEFT PAGE — TAKE FLOWER
+   ===================================================== */
+
+.left-flower-choice {
+    left: 8%;
+    right: auto;
+    bottom: 10%;
+    width: 84%;
+    justify-content: flex-start;
+}
+
+
+/* =====================================================
+   RIGHT PAGE — REJECT
+   ===================================================== */
+
+.right-flower-choice {
+    left: 8%;
+    right: auto;
+    bottom: 10%;
+    width: 84%;
+    justify-content: flex-end;
+}
+
+
+/* =====================================================
+   BUTTONS
+   ===================================================== */
+
+.flower-button {
+    position: relative;
+
+    width: min(85%, 260px);
+    min-height: 58px;
+
+    border: none;
+    border-radius: 18px;
+
+    padding: 14px 22px;
+
+    font-size: 18px;
+    font-weight: 700;
+
+    color: #fff;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* =========================================================
+   FINAL PAGE — PAGE 12 + PAGE 13 SPREAD
+   SURGICAL FIX ONLY
+   ========================================================= */
+
+.final-choice-page {
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   FINAL SPREAD BOOK
+   ========================================================= */
+
+.book.final-spread {
+    width: min(96vw, 1050px);
+    height: min(112vw, 760px);
+
+    position: relative;
+
+    transition:
+        width .75s ease,
+        height .75s ease;
+}
+
+
+/* Hide every other page ONLY during final spread */
+
+.book.final-spread
+.book-page:not(.page-12):not(.page-13) {
+    visibility: hidden;
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   PAGE 12 — LEFT SIDE
+   ========================================================= */
+
+.book.final-spread .page-12 {
+    left: 0;
+    right: auto;
+    top: 0;
+    bottom: auto;
+
+    width: 50%;
+    height: 100%;
+
+    transform-origin: right center;
+
+    border-radius:
+        13px 0 0 13px;
+
+    z-index: 2;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   PAGE 13 — RIGHT SIDE
+   ========================================================= */
+
+.book.final-spread .page-13 {
+    left: 50%;
+    right: auto;
+    top: 0;
+    bottom: auto;
+
+    width: 50%;
+    height: 100%;
+
+    transform-origin: left center;
+
+    border-radius:
+        0 13px 13px 0;
+
+    z-index: 1;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   FINAL SPREAD PHOTO FRAME
+   ========================================================= */
+
+.book.final-spread .photo-frame {
+    width: 100%;
+
+    aspect-ratio: .82;
+
+    max-height: 64%;
+
+    padding: 8px;
+
+    margin: 0 auto;
+}
+
+
+.book.final-spread .photo-caption {
+    margin-top: 13px;
+
+    font-size:
+        clamp(13px, 2.5vw, 20px);
+}
+
+
+/* =========================================================
+   PAGE 13 NUMBER
+   ---------------------------------------------------------
+   If the HTML accidentally contains "12" on page 13,
+   visually replace ONLY that number with "13".
+   ========================================================= */
+
+.book.final-spread .page-13 .photo-number {
+    font-size: 0;
+}
+
+
+.book.final-spread .page-13 .photo-number::after {
+    content: "13";
+
+    font-size: 15px;
+
+    letter-spacing: .12em;
+}
+
+
+/* =====================================================
+   FINAL CHOICE BUTTON CONTAINERS
+   ===================================================== */
+
+.flower-choice {
+    position: absolute;
+
+    z-index: 50;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    pointer-events: auto;
+}
+
+
+/* =====================================================
+   PAGE 12 — TAKE FLOWER
+   ===================================================== */
+
+.book.final-spread .left-flower-choice {
+    left: 8%;
+    right: auto;
+
+    bottom: 10%;
+
+    width: 84%;
+
+    justify-content: center;
+}
+
+
+/* =====================================================
+   PAGE 13 — REJECT
+   ===================================================== */
+
+.book.final-spread .right-flower-choice {
+    left: 8%;
+    right: auto;
+
+    bottom: 10%;
+
+    width: 84%;
+
+    justify-content: center;
+}
+
+
+/* =====================================================
+   BUTTON VISIBILITY
+   -----------------------------------------------------
+   This prevents the extra buttons appearing outside
+   the book before the final spread.
+   ===================================================== */
+
+.left-flower-choice,
+.right-flower-choice {
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+}
+
+
+.book.final-spread .left-flower-choice,
+.book.final-spread .right-flower-choice {
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+}
+
+
+/* =====================================================
+   BUTTONS
+   ===================================================== */
+
+.flower-button {
+    position: relative;
+
+    width: min(85%, 260px);
+
+    min-height: 58px;
+
+    border: none;
+
+    border-radius: 18px;
+
+    padding: 14px 22px;
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+    color: #fff;
+
+    cursor: pointer;
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+
+/* =====================================================
+   TAKE FLOWER
+   ===================================================== */
+
+.take-flower {
+    background:
+        linear-gradient(
+            135deg,
+            #32d46d,
+            #159447
+        );
+
+    box-shadow:
+        0 0 12px
+        rgba(50, 212, 109, .65),
+
+        0 0 28px
+        rgba(50, 212, 109, .35);
+}
+
+
+/* =====================================================
+   REJECT
+   ===================================================== */
+
+.reject-flower {
+    background:
+        linear-gradient(
+            135deg,
+            #ff4b5c,
+            #e51f35
+        );
+
+    box-shadow:
+        0 0 12px
+        rgba(255, 75, 92, .65),
+
+        0 0 28px
+        rgba(255, 75, 92, .35);
+}
+
+
+/* =====================================================
+   BUTTON HOVER / PRESS
+   ===================================================== */
+
+.flower-button:hover {
+    transform:
+        translateY(-3px)
+        scale(1.02);
+}
+
+
+.flower-button:active {
+    transform:
+        scale(.96);
+}
+
+
+/* =========================================================
+   FINAL SURPRISE
+   ========================================================= */
+
+.final-surprise-message {
+    width: 100%;
+
+    margin-top: 20px;
+
+    padding: 22px 16px;
+
+    text-align: center;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 51, 188, .16),
+            rgba(137, 80, 255, .18)
+        );
+
+    border:
+        1px solid
+        rgba(255, 79, 203, .42);
+
+    box-shadow:
+        0 0 28px
+        rgba(255, 53, 190, .18);
+
+    opacity: 0;
+
+    transform:
+        translateY(15px)
+        scale(.96);
+
+    pointer-events: none;
+
+    transition:
+        opacity .7s ease,
+        transform .7s ease;
+}
+
+.final-surprise-message.visible {
+    opacity: 1;
+
+    transform:
+        translateY(0)
+        scale(1);
+}
+
+.final-surprise-message h2 {
+    margin:
+        0 0 10px;
+
+    font-size:
+        clamp(20px, 5vw, 30px);
+}
+
+.final-surprise-message p {
+    margin: 7px 0;
+
+    color:
+        rgba(255, 255, 255, .82);
+}
+
+.final-surprise-message span {
+    display: block;
+
+    margin-top: 12px;
+
+    font-size: 20px;
+}
+
+
+/* =========================================================
+   CURSOR HINT
+   ========================================================= */
+
+.cursor-hint {
+    width: 100%;
+
+    margin:
+        18px 0 20px;
+
+    padding:
+        14px 15px;
+
+    border-radius: 16px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(155, 92, 255, .18),
+            rgba(0, 234, 255, .12)
+        );
+
+    border:
+        1px solid
+        rgba(155, 92, 255, .55);
+
+    box-shadow:
+        0 0 18px
+        rgba(155, 92, 255, .18);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transform:
+        translateY(12px)
+        scale(.96);
+
+    transition:
+        opacity .65s ease,
+        transform .65s ease,
+        visibility 0s linear .65s;
+
+    pointer-events: none;
+}
+
+.cursor-hint.visible {
+    opacity: 1;
+
+    visibility: visible;
+
+    transform:
+        translateY(0)
+        scale(1);
+
+    transition:
+        opacity .65s ease,
+        transform .65s ease,
+        visibility 0s;
+}
+
+.cursor-hint strong {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #ffd84d;
+
+    font-size: 15px;
+
+    letter-spacing: .16em;
+}
+
+.cursor-hint span {
+    display: block;
+
+    color:
+        rgba(255, 255, 255, .92);
+
+    font-size: 13px;
+
+    line-height: 1.45;
+}
+
+
+/* =========================================================
+   CUSTOM DRAG CURSOR
+   ========================================================= */
+
+.drag-cursor {
+    position: fixed;
+
+    width: 64px;
+    height: 64px;
+
+    left: 50%;
+    top: 50%;
+
+    z-index: 9999;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    pointer-events: auto;
+
+    cursor: grab;
+
+    touch-action: none;
+
+    user-select: none;
+    -webkit-user-select: none;
+
+    opacity: 0;
+
+    transform:
+        translate(-50%, -50%)
+        scale(.85);
+
+    transition:
+        opacity .35s ease,
+        transform .35s ease;
+}
+
+.drag-cursor.visible {
+    opacity: 1;
+
+    transform:
+        translate(-50%, -50%)
+        scale(1);
+}
+
+.drag-cursor.dragging {
+    cursor: grabbing;
+
+    transform:
+        translate(-50%, -50%)
+        scale(1.08);
+}
+
+.drag-cursor-inner {
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 255, 255, .94);
+
+    color: #222;
+
+    border:
+        2px solid
+        rgba(255, 255, 255, .7);
+
+    box-shadow:
+        0 0 18px
+        rgba(255, 255, 255, .45),
+        0 5px 18px
+        rgba(0, 0, 0, .28);
+
+    font-size: 28px;
+}
+
+
+/* =========================================================
+   HOLOGRAPHIC PANDA
+   ========================================================= */
+
+.holographic-panda {
+    position: fixed;
+
+    left: -190px;
+
+    bottom: 18%;
+
+    width: 150px;
+    height: 210px;
+
+    z-index: 100000;
+
+    pointer-events: none;
+
+    opacity: 0;
+
+    filter:
+        drop-shadow(
+            0 0 10px
+            rgba(0, 234, 255, .9)
+        )
+        drop-shadow(
+            0 0 25px
+            rgba(155, 92, 255, .65)
+        );
+}
+
+
+/* Panda body container */
+
+.panda-body {
+    position: absolute;
+
+    left: 35px;
+    top: 18px;
+
+    width: 80px;
+    height: 170px;
+
+    transform-style:
+        preserve-3d;
+}
+
+
+/* Glow */
+
+.panda-glow {
+    position: absolute;
+
+    left: 25px;
+    top: 10px;
+
+    width: 105px;
+    height: 175px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(0, 234, 255, .28),
+            rgba(155, 92, 255, .12),
+            transparent 70%
+        );
+
+    filter: blur(14px);
+
+    opacity: .8;
+}
+
+
+/* Head */
+
+.panda-head {
+    position: absolute;
+
+    left: 5px;
+    top: 0;
+
+    width: 70px;
+    height: 64px;
+
+    border-radius:
+        45%
+        45%
+        48%
+        48%;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(245,255,255,.8),
+            rgba(155,225,255,.28)
+        );
+
+    border:
+        2px solid
+        rgba(0, 234, 255, .9);
+
+    box-shadow:
+        inset 0 0 14px
+        rgba(255, 255, 255, .42),
+        0 0 18px
+        rgba(0, 234, 255, .75);
+}
+
+
+/* Ears */
+
+.panda-ear {
+    position: absolute;
+
+    top: -9px;
+
+    width: 25px;
+    height: 25px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(155, 92, 255, .55);
+
+    border:
+        2px solid
+        rgba(0, 234, 255, .8);
+
+    box-shadow:
+        0 0 12px
+        rgba(155, 92, 255, .75);
+}
+
+.panda-ear-left {
+    left: 0;
+}
+
+.panda-ear-right {
+    right: 0;
+}
+
+
+/* Eyes */
+
+.panda-eye {
+    position: absolute;
+
+    top: 24px;
+
+    width: 14px;
+    height: 19px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(5, 15, 30, .88);
+
+    border:
+        1px solid
+        rgba(0, 234, 255, .8);
+
+    box-shadow:
+        0 0 7px
+        rgba(0, 234, 255, .8);
+}
+
+.panda-eye-left {
+    left: 16px;
+}
+
+.panda-eye-right {
+    right: 16px;
+}
+
+.panda-eye span {
+    position: absolute;
+
+    width: 4px;
+    height: 6px;
+
+    left: 3px;
+    top: 3px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    box-shadow:
+        0 0 5px white;
+}
+
+
+/* Nose */
+
+.panda-nose {
+    position: absolute;
+
+    left: 29px;
+    top: 41px;
+
+    width: 12px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(20, 20, 30, .95);
+
+    box-shadow:
+        0 0 7px
+        rgba(0, 234, 255, .55);
+}
+
+
+/* Mouth */
+
+.panda-mouth {
+    position: absolute;
+
+    left: 25px;
+    top: 48px;
+
+    width: 20px;
+    height: 10px;
+
+    border-bottom:
+        2px solid
+        rgba(255,255,255,.9);
+
+    border-radius: 0 0 50% 50%;
+
+    transform-origin:
+        center top;
+}
+
+.panda-mouth span {
+    display: block;
+
+    width: 11px;
+    height: 4px;
+
+    margin:
+        6px auto 0;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 75, 120, .8);
+
+    opacity: .8;
+}
+
+
+/* Torso */
+
+.panda-torso {
+    position: absolute;
+
+    left: 9px;
+    top: 58px;
+
+    width: 62px;
+    height: 72px;
+
+    border-radius:
+        42%
+        42%
+        28%
+        28%;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(245,255,255,.7),
+            rgba(70,150,200,.24)
+        );
+
+    border:
+        2px solid
+        rgba(0, 234, 255, .78);
+
+    box-shadow:
+        inset 0 0 14px
+        rgba(255,255,255,.35),
+        0 0 16px
+        rgba(0,234,255,.55);
+}
+
+
+/* Arms */
+
+.panda-arm {
+    position: absolute;
+
+    top: 67px;
+
+    width: 17px;
+    height: 62px;
+
+    border-radius: 999px;
+
+    background:
+        rgba(100,205,240,.42);
+
+    border:
+        2px solid
+        rgba(0,234,255,.75);
+
+    transform-origin:
+        top center;
+}
+
+.panda-arm-left {
+    left: -3px;
+
+    transform:
+        rotate(22deg);
+}
+
+.panda-arm-right {
+    right: -3px;
+
+    transform:
+        rotate(-22deg);
+}
+
+
+/* Legs */
+
+.panda-leg {
+    position: absolute;
+
+    top: 122px;
+
+    width: 20px;
+    height: 54px;
+
+    border-radius: 999px;
+
+    background:
+        rgba(95,180,220,.4);
+
+    border:
+        2px solid
+        rgba(0,234,255,.72);
+
+    transform-origin:
+        top center;
+}
+
+.panda-leg-left {
+    left: 14px;
+}
+
+.panda-leg-right {
+    right: 14px;
+}
+
+
+/* Speech */
+
+.panda-speech {
+    position: absolute;
+
+    left: 100px;
+    top: 38px;
+
+    width: 205px;
+
+    padding:
+        11px 14px;
+
+    border-radius: 16px;
+
+    color: #eaffff;
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+    text-align: center;
+
+    background:
+        rgba(0, 234, 255, .09);
+
+    border:
+        1px solid
+        rgba(0,234,255,.55);
+
+    box-shadow:
+        0 0 18px
+        rgba(0,234,255,.35);
+
+    opacity: 0;
+
+    transform:
+        scale(.7)
+        translateY(10px);
+
+    transition:
+        opacity .35s ease,
+        transform .35s ease;
+}
+
+.panda-speaking .panda-speech {
+    opacity: 1;
+
+    transform:
+        scale(1)
+        translateY(0);
+}
+
+
+/* Panda talking */
+
+.panda-speaking .panda-mouth {
+    animation:
+        pandaTalk
+        .22s
+        ease-in-out
+        infinite alternate;
+}
+
+
+/* Walking */
+
+.holographic-panda.panda-walking {
+    animation:
+        pandaWalkIn
+        1.8s
+        cubic-bezier(.22,.72,.18,1)
+        forwards;
+}
+
+.holographic-panda.panda-walking .panda-leg-left {
+    animation:
+        pandaLegA
+        .28s
+        ease-in-out
+        infinite alternate;
+}
+
+.holographic-panda.panda-walking .panda-leg-right {
+    animation:
+        pandaLegB
+        .28s
+        ease-in-out
+        infinite alternate;
+}
+
+.holographic-panda.panda-walking .panda-arm-left {
+    animation:
+        pandaArmA
+        .28s
+        ease-in-out
+        infinite alternate;
+}
+
+.holographic-panda.panda-walking .panda-arm-right {
+    animation:
+        pandaArmB
+        .28s
+        ease-in-out
+        infinite alternate;
+}
+
+
+/* Leaving */
+
+.holographic-panda.panda-leaving {
+    animation:
+        pandaWalkOut
+        2.1s
+        cubic-bezier(.42,0,.8,.2)
+        forwards;
+}
+
+
+/* =========================================================
+   BOOK HINT
+   ========================================================= */
+
+.book-hint {
+    margin-top: 16px;
+
+    color:
+        rgba(255, 255, 255, .38);
+
+    font-size: 11px;
+
+    letter-spacing: .34em;
+
+    text-transform: uppercase;
+
+    text-align: center;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   CONTROLS
+   ========================================================= */
+
+.book-controls {
+    width:
+        min(90vw, 500px);
+
+    margin-top: 28px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    position: relative;
+
+    z-index: 100;
+}
+
+.book-controls button {
+    width: 64px;
+    height: 64px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, .18);
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            rgba(255, 255, 255, .15),
+            rgba(255, 255, 255, .04)
+        );
+
+    color: white;
+
+    font-size: 28px;
+
+    box-shadow:
+        0 0 18px
+        rgba(0, 234, 255, .12);
+
+    cursor: pointer;
+
+    transition:
+        transform .2s ease,
+        box-shadow .3s ease;
+}
+
+.book-controls button:not(:disabled):active {
+    transform: scale(.92);
+}
+
+.book-controls button:disabled {
+    opacity: .22;
+
+    cursor: default;
+}
+
+#pageCounter {
+    color:
+        rgba(255, 255, 255, .7);
+
+    font-size: 15px;
+
+    letter-spacing: .25em;
+}
+
+
+/* =========================================================
+   RETURN BUTTON
+   ========================================================= */
+
+.book-return {
+    margin-top: 34px;
+
+    min-width: 250px;
+
+    padding:
+        15px 26px;
+
+    border-radius: 999px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, .13);
+
+    background:
+        rgba(255, 255, 255, .035);
+
+    color:
+        rgba(255, 255, 255, .76);
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+    transition:
+        background .25s ease,
+        transform .2s ease;
+}
+
+.book-return:hover {
+    background:
+        rgba(255, 255, 255, .08);
+}
+
+.book-return:active {
+    transform: scale(.97);
+}
+
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes neonTextFlow {
+
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 300% 50%;
+    }
+}
+
+
+@keyframes bookGlowPulse {
+
+    0%,
+    100% {
+        opacity: .65;
+
+        transform:
+            scale(.95);
+    }
+
+    50% {
+        opacity: 1;
+
+        transform:
+            scale(1.05);
+    }
+}
+
+
+@keyframes heartBeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.12);
+    }
+}
+
+
+/* =========================================================
+   PANDA ANIMATIONS
+   ========================================================= */
+
+@keyframes pandaWalkIn {
+
+    0% {
+        left: -190px;
+
+        opacity: 0;
+
+        transform:
+            translateY(20px)
+            scale(.72);
+    }
+
+    15% {
+        opacity: 1;
+    }
+
+    65% {
+        left: calc(50% - 75px);
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+    100% {
+        left: calc(50% - 75px);
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+@keyframes pandaWalkOut {
+
+    0% {
+        left: calc(50% - 75px);
+
+        opacity: 1;
+    }
+
+    100% {
+        left: -210px;
+
+        opacity: 0;
+
+        transform:
+            translateY(15px)
+            scale(.72);
+    }
+}
+
+
+@keyframes pandaLegA {
+
+    from {
+        transform:
+            rotate(18deg);
+    }
+
+    to {
+        transform:
+            rotate(-18deg);
+    }
+}
+
+
+@keyframes pandaLegB {
+
+    from {
+        transform:
+            rotate(-18deg);
+    }
+
+    to {
+        transform:
+            rotate(18deg);
+    }
+}
+
+
+@keyframes pandaArmA {
+
+    from {
+        transform:
+            rotate(25deg);
+    }
+
+    to {
+        transform:
+            rotate(-20deg);
+    }
+}
+
+@keyframes pandaArmB {
+
+    from {
+        transform:
+            rotate(-25deg);
+    }
+
+    to {
+        transform:
+            rotate(20deg);
+    }
+}
+
+
+@keyframes pandaTalk {
+
+    from {
+        transform:
+            scaleY(.65);
+    }
+
+    to {
+        transform:
+            scaleY(1.35);
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .book-experience {
+        padding:
+            35px
+            12px
+            65px;
+    }
+
+
+    .book-header {
+        margin-bottom: 18px;
+    }
+
+
+    .book-header p {
+        font-size: 13px;
+    }
+
+
+    .book-stage {
+        min-height:
+            calc(
+                var(--book-height)
+                + 100px
+            );
+    }
+
+
+    .photo-page {
+        padding: 18px;
+    }
+
+
+    .photo-frame {
+        padding: 8px;
+    }
+
+
+    /*
+     * Final mobile spread.
+     */
+
+    .book.final-spread {
+
+        width: 96vw;
+
+        height:
+            min(118vw, 620px);
+    }
+
+
+    .book.final-spread .page-12,
+    .book.final-spread .page-13 {
+
+        padding: 13px;
+
+    }
+
+
+    .book.final-spread .photo-frame {
+
+        aspect-ratio: .78;
+
+        max-height: 58%;
+
+        padding: 6px;
+    }
+
+
+    .book.final-spread .photo-caption {
+
+        margin-top: 9px;
+
+        font-size:
+            clamp(11px, 3vw, 16px);
+    }
+
+
+    .flower-choice,
+    .final-page-flower-choice {
+
+        gap: 7px;
+
+        min-height: 48px;
+
+        margin-top: 10px;
+    }
+
+
+    .flower-button {
+
+        min-height: 47px;
+
+        padding:
+            8px 7px;
+
+        border-radius: 11px;
+
+        font-size:
+            clamp(10px, 2.7vw, 14px);
+    }
+
+
+    .reject-flower {
+
+        width:
+            calc(50% - 3.5px);
+
+        min-height: 47px;
+    }
+
+
+    .book-controls {
+
+        width:
+            min(88vw, 420px);
+    }
+
+
+    .book-controls button {
+
+        width: 58px;
+        height: 58px;
+    }
+
+
+    .book-return {
+
+        width:
+            min(85vw, 330px);
+    }
+
+
+    .cursor-hint {
+
+        padding:
+            13px 12px;
+    }
+
+
+    .cursor-hint span {
+
+        font-size: 12px;
+    }
+
+
+    .drag-cursor {
+
+        width: 70px;
+        height: 70px;
+    }
+
+
+    .holographic-panda {
+
+        bottom: 24%;
+
+        transform-origin:
+            center bottom;
+
+        transform:
+            scale(.78);
+    }
+
+
+    .panda-speech {
+
+        width: 170px;
+
+        left: 92px;
+
+        font-size: 12px;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 390px) {
+
+    .book.final-spread {
+
+        width: 98vw;
+
+        height:
+            min(125vw, 520px);
+    }
+
+
+    .book.final-spread .page-12,
+    .book.final-spread .page-13 {
+
+        padding: 9px;
+    }
+
+
+    .book.final-spread .photo-frame {
+
+        max-height: 55%;
+
+        padding: 5px;
+    }
+
+
+    .flower-choice,
+    .final-page-flower-choice {
+
+        gap: 5px;
+    }
+
+
+    .flower-button {
+
+        min-height: 43px;
+
+        padding:
+            6px 4px;
+
+        font-size: 10px;
+    }
+
+
+    .reject-flower {
+
+        min-height: 43px;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+
+        animation-duration:
+            .01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        transition-duration:
+            .01ms !important;
+    }
+}

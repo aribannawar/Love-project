@@ -1,0 +1,1339 @@
+/* =========================================================
+   SURPRISE PROJECT
+   INTRO / OPENING SCREEN
+   ========================================================= */
+
+
+/* =========================================================
+   1. INTRO ROOT
+   ========================================================= */
+
+.intro {
+
+    position: relative;
+
+    width: 100%;
+    min-height: 100vh;
+
+    min-height: 100svh;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    isolation: isolate;
+
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            rgba(139, 92, 246, 0.12),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 15% 80%,
+            rgba(77, 234, 255, 0.07),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 85% 15%,
+            rgba(255, 95, 162, 0.06),
+            transparent 25%
+        ),
+        #02030a;
+
+}
+
+
+/* =========================================================
+   2. AMBIENT GRID
+   ========================================================= */
+
+.intro::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: -50%;
+
+    z-index: -3;
+
+    background-image:
+        linear-gradient(
+            rgba(139, 92, 246, 0.045) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(139, 92, 246, 0.045) 1px,
+            transparent 1px
+        );
+
+    background-size:
+        55px 55px;
+
+    transform:
+        perspective(700px)
+        rotateX(58deg)
+        translateY(25%);
+
+    transform-origin:
+        center bottom;
+
+    opacity: 0.65;
+
+}
+
+
+/* =========================================================
+   3. VIGNETTE
+   ========================================================= */
+
+.intro::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 5;
+
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            transparent 42%,
+            rgba(0, 0, 0, 0.58) 100%
+        );
+
+}
+
+
+/* =========================================================
+   4. CONTENT WRAPPER
+   ========================================================= */
+
+.intro-content {
+
+    position: relative;
+
+    z-index: 10;
+
+    width:
+        min(720px, calc(100% - 34px));
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+}
+
+
+/* =========================================================
+   5. SMALL TOP LABEL
+   ========================================================= */
+
+.intro-label {
+
+    margin-bottom: 18px;
+
+    color:
+        var(--cyan);
+
+    font-size: 9px;
+
+    font-weight: 900;
+
+    letter-spacing: 4px;
+
+    text-transform: uppercase;
+
+    opacity: 0.9;
+
+}
+
+
+/* =========================================================
+   6. MAIN TITLE
+   ========================================================= */
+
+.intro-title {
+
+    margin: 0;
+
+    font-size:
+        clamp(42px, 11vw, 92px);
+
+    line-height: 0.95;
+
+    font-weight: 900;
+
+    letter-spacing:
+        -4px;
+
+    color:
+        #f8f7ff;
+
+    text-shadow:
+        0 0 25px
+        rgba(139, 92, 246, 0.18),
+
+        0 0 70px
+        rgba(139, 92, 246, 0.08);
+
+}
+
+
+/* =========================================================
+   7. TITLE ACCENT
+   ========================================================= */
+
+.intro-title .accent {
+
+    color: transparent;
+
+    background:
+        linear-gradient(
+            100deg,
+            var(--cyan),
+            var(--accent-light),
+            var(--pink)
+        );
+
+    -webkit-background-clip: text;
+
+    background-clip: text;
+
+}
+
+
+/* =========================================================
+   8. SUBTITLE
+   ========================================================= */
+
+.intro-subtitle {
+
+    max-width: 500px;
+
+    margin-top: 20px;
+
+    color:
+        var(--text-secondary);
+
+    font-size:
+        clamp(12px, 2.8vw, 15px);
+
+    line-height: 1.8;
+
+    letter-spacing:
+        0.2px;
+
+}
+
+
+
+k/* =========================================================
+   HOLOGRAM SCAN
+   ========================================================= */
+
+@keyframes heartScan {
+
+    0% {
+        opacity: 0;
+        transform:
+            translateY(-65px)
+            scaleX(0.5);
+    }
+
+    15% {
+        opacity: 1;
+    }
+
+    50% {
+        transform:
+            translateY(0)
+            scaleX(1);
+    }
+
+    85% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform:
+            translateY(65px)
+            scaleX(0.5);
+    }
+
+}
+
+
+/* =========================================================
+   3D HOLOGRAPHIC HEART
+   ========================================================= */
+
+.hero-visual {
+
+    position: relative;
+
+    width: 220px;
+    height: 220px;
+
+    margin: 0 auto 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    perspective: 900px;
+
+    transform-style: preserve-3d;
+
+    z-index: 5;
+
+}
+
+
+/* =========================================================
+   HOLOGRAPHIC AURA
+   ========================================================= */
+
+.hero-visual::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 145px;
+    height: 145px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(75, 220, 255, 0.28) 0%,
+            rgba(115, 75, 255, 0.22) 35%,
+            rgba(245, 75, 190, 0.12) 55%,
+            transparent 72%
+        );
+
+    filter: blur(22px);
+
+    animation:
+        heartAura 3.2s ease-in-out infinite;
+
+    z-index: -2;
+
+}
+
+
+/* =========================================================
+   ACTUAL HEART
+   ========================================================= */
+
+.hero-visual::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 105px;
+    height: 105px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff 0%,
+            #6eeaff 20%,
+            #7260ff 50%,
+            #d95cff 75%,
+            #ff66b7 100%
+        );
+
+    /*
+     * Real heart silhouette.
+     */
+    clip-path: polygon(
+        50% 92%,
+        42% 84%,
+        10% 53%,
+        4% 39%,
+        5% 25%,
+        12% 14%,
+        24% 8%,
+        36% 10%,
+        50% 23%,
+        64% 10%,
+        76% 8%,
+        88% 14%,
+        95% 25%,
+        96% 39%,
+        90% 53%,
+        58% 84%
+    );
+
+    filter:
+        drop-shadow(
+            0 0 8px
+            rgba(100, 235, 255, 0.95)
+        )
+        drop-shadow(
+            0 0 25px
+            rgba(120, 80, 255, 0.75)
+        )
+        drop-shadow(
+            0 0 55px
+            rgba(255, 70, 190, 0.4)
+        );
+
+    transform-style: preserve-3d;
+
+    animation:
+        heartFloat 4s ease-in-out infinite,
+        heartPulse 2.6s ease-in-out infinite;
+
+    z-index: 3;
+
+}
+
+
+/* =========================================================
+   3D DEPTH / SECONDARY HEART
+   ========================================================= */
+
+.hero-visual {
+
+    --heart-depth:
+        rgba(65, 35, 160, 0.5);
+
+}
+
+
+.hero-visual .heart-particle {
+
+    position: absolute;
+
+    width: 4px;
+    height: 4px;
+
+    border-radius: 50%;
+
+    background:
+        #8df5ff;
+
+    box-shadow:
+        0 0 8px
+        rgba(80, 230, 255, 0.95),
+        0 0 16px
+        rgba(100, 100, 255, 0.55);
+
+    pointer-events: none;
+
+    z-index: 6;
+
+    animation:
+        heartParticle 3.5s ease-in-out infinite;
+
+}
+
+
+/* =========================================================
+   PARTICLE POSITIONS
+   ========================================================= */
+
+.hero-visual .heart-particle:nth-of-type(2) {
+
+    top: 42px;
+    left: 52px;
+
+    animation-delay:
+        -0.5s;
+
+}
+
+
+.hero-visual .heart-particle:nth-of-type(3) {
+
+    top: 57px;
+    right: 43px;
+
+    animation-delay:
+        -1.2s;
+
+}
+
+
+.hero-visual .heart-particle:nth-of-type(4) {
+
+    bottom: 52px;
+    left: 38px;
+
+    animation-delay:
+        -1.9s;
+
+}
+
+
+.hero-visual .heart-particle:nth-of-type(5) {
+
+    bottom: 38px;
+    right: 55px;
+
+    animation-delay:
+        -2.6s;
+
+}
+
+
+/* =========================================================
+   HOLOGRAPHIC SCAN
+   ========================================================= */
+
+.heart-scan {
+
+    position: absolute;
+
+    width: 130px;
+    height: 2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(90, 235, 255, 0.95),
+            rgba(210, 90, 255, 0.9),
+            rgba(255, 100, 190, 0.8),
+            transparent
+        );
+
+    box-shadow:
+        0 0 12px
+        rgba(80, 220, 255, 0.8);
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    z-index: 7;
+
+    animation:
+        heartScan 3s linear infinite;
+
+}
+
+
+/* =========================================================
+   FLOATING HEART
+   ========================================================= */
+
+@keyframes heartFloat {
+
+    0%,
+    100% {
+
+        transform:
+            translate3d(0, 0, 20px)
+            rotateY(-5deg)
+            rotateX(2deg);
+
+    }
+
+    25% {
+
+        transform:
+            translate3d(0, -9px, 35px)
+            rotateY(7deg)
+            rotateX(-2deg);
+
+    }
+
+    50% {
+
+        transform:
+            translate3d(0, -3px, 25px)
+            rotateY(-7deg)
+            rotateX(3deg);
+
+    }
+
+    75% {
+
+        transform:
+            translate3d(0, -11px, 38px)
+            rotateY(5deg)
+            rotateX(-2deg);
+
+    }
+
+}
+
+
+/* =========================================================
+   HEARTBEAT
+   ========================================================= */
+
+@keyframes heartPulse {
+
+    0%,
+    100% {
+
+        filter:
+            brightness(0.95)
+            saturate(1.05)
+            drop-shadow(
+                0 0 12px
+                rgba(100, 220, 255, 0.5)
+            );
+
+    }
+
+    45% {
+
+        filter:
+            brightness(1.2)
+            saturate(1.35)
+            drop-shadow(
+                0 0 20px
+                rgba(100, 220, 255, 0.85)
+            )
+            drop-shadow(
+                0 0 45px
+                rgba(230, 80, 220, 0.45)
+            );
+
+    }
+
+}
+
+
+/* =========================================================
+   AURA PULSE
+   ========================================================= */
+
+@keyframes heartAura {
+
+    0%,
+    100% {
+
+        opacity: 0.45;
+
+        transform:
+            scale(0.85);
+
+    }
+
+    50% {
+
+        opacity: 1;
+
+        transform:
+            scale(1.18);
+
+    }
+
+}
+
+
+/* =========================================================
+   SCAN ANIMATION
+   ========================================================= */
+
+@keyframes heartScan {
+
+    0% {
+
+        opacity: 0;
+
+        transform:
+            translateY(-65px)
+            scaleX(0.4);
+
+    }
+
+    15% {
+
+        opacity: 1;
+
+    }
+
+    50% {
+
+        opacity: 0.9;
+
+        transform:
+            translateY(0)
+            scaleX(1);
+
+    }
+
+    85% {
+
+        opacity: 1;
+
+    }
+
+    100% {
+
+        opacity: 0;
+
+        transform:
+            translateY(65px)
+            scaleX(0.4);
+
+    }
+
+}
+
+
+/* =========================================================
+   PARTICLES
+   ========================================================= */
+
+@keyframes heartParticle {
+
+    0%,
+    100% {
+
+        opacity: 0.2;
+
+        transform:
+            translate3d(0, 12px, 0)
+            scale(0.6);
+
+    }
+
+    50% {
+
+        opacity: 1;
+
+        transform:
+            translate3d(0, -20px, 30px)
+            scale(1.25);
+
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .hero-visual {
+
+        width: 180px;
+        height: 180px;
+
+    }
+
+    .hero-visual::after {
+
+        width: 90px;
+        height: 90px;
+
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .hero-visual::before,
+    .hero-visual::after,
+    .heart-scan,
+    .heart-particle {
+
+        animation: none;
+
+    }
+
+}
+
+
+/* =========================================================
+   10. BEGIN BUTTON
+   ========================================================= */
+
+.intro-button {
+
+    position: relative;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    min-width: 210px;
+
+    min-height: 54px;
+
+    margin-top: 32px;
+
+    padding:
+        0 25px;
+
+    overflow: hidden;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.16);
+
+    border-radius:
+        16px;
+
+    color:
+        #ffffff;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(139, 92, 246, 0.82),
+            rgba(91, 54, 191, 0.82)
+        );
+
+    box-shadow:
+        0 12px 35px
+        rgba(139, 92, 246, 0.22),
+
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.15);
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    letter-spacing:
+        1.4px;
+
+    text-transform: uppercase;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+
+}
+
+
+/* moving light */
+
+.intro-button::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    bottom: 0;
+
+    left: -80%;
+
+    width: 55%;
+
+    transform:
+        skewX(-25deg);
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.18),
+            transparent
+        );
+
+    animation:
+        introButtonShine
+        4s
+        ease-in-out
+        infinite;
+
+}
+
+
+/* button hover */
+
+.intro-button:hover {
+
+    transform:
+        translateY(-3px);
+
+    border-color:
+        rgba(139, 92, 246, 0.55);
+
+    box-shadow:
+        0 18px 45px
+        rgba(139, 92, 246, 0.32),
+
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.18);
+
+}
+
+
+/* button press */
+
+.intro-button:active {
+
+    transform:
+        translateY(1px);
+
+}
+
+
+/* =========================================================
+   11. BUTTON ARROW
+   ========================================================= */
+
+.intro-button .arrow {
+
+    width: 27px;
+    height: 27px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 255, 255, 0.10);
+
+    transition:
+        transform 0.25s ease;
+
+}
+
+
+.intro-button:hover .arrow {
+
+    transform:
+        translateX(4px);
+
+}
+
+
+/* =========================================================
+   12. MICRO TEXT
+   ========================================================= */
+
+.intro-micro {
+
+    margin-top: 16px;
+
+    color:
+        var(--text-muted);
+
+    font-size: 8px;
+
+    letter-spacing:
+        1.8px;
+
+    text-transform:
+        uppercase;
+
+}
+
+
+/* =========================================================
+   13. FLOATING PARTICLES
+   ========================================================= */
+
+.intro-particles {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: -1;
+
+    pointer-events: none;
+
+    overflow: hidden;
+
+}
+
+
+.intro-particle {
+
+    position: absolute;
+
+    width: 3px;
+    height: 3px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 255, 255, 0.75);
+
+    box-shadow:
+        0 0 10px
+        rgba(139, 92, 246, 0.8);
+
+    animation:
+        introParticleFloat
+        var(--duration, 7s)
+        ease-in-out
+        infinite;
+
+    animation-delay:
+        var(--delay, 0s);
+
+}
+
+
+/* =========================================================
+   14. CORNER HUD
+   ========================================================= */
+
+.intro-hud {
+
+    position: absolute;
+
+    z-index: 10;
+
+    color:
+        rgba(167, 175, 196, 0.42);
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-size: 7px;
+
+    letter-spacing:
+        1.5px;
+
+    text-transform:
+        uppercase;
+
+}
+
+
+.intro-hud.top-left {
+
+    top: 22px;
+    left: 22px;
+
+}
+
+
+.intro-hud.top-right {
+
+    top: 22px;
+    right: 22px;
+
+    text-align: right;
+
+}
+
+
+.intro-hud.bottom-left {
+
+    bottom: 22px;
+    left: 22px;
+
+}
+
+
+.intro-hud.bottom-right {
+
+    right: 22px;
+    bottom: 22px;
+
+    text-align: right;
+
+}
+
+
+/* =========================================================
+   15. INTRO EXIT STATE
+   Controlled by intro.js
+   ========================================================= */
+
+.intro.is-exiting {
+
+    pointer-events: none;
+
+    animation:
+        introExit
+        1s
+        cubic-bezier(.7, 0, .2, 1)
+        forwards;
+
+}
+
+
+/* =========================================================
+   16. ANIMATIONS
+   ========================================================= */
+
+@keyframes introOrbFloat {
+
+    0%,
+    100% {
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+    50% {
+
+        transform:
+            translateY(-10px)
+            scale(1.035);
+
+    }
+
+}
+
+
+@keyframes introOrbit {
+
+    from {
+
+        transform:
+            rotate(-25deg)
+            scaleX(1.35);
+
+    }
+
+    to {
+
+        transform:
+            rotate(335deg)
+            scaleX(1.35);
+
+    }
+
+}
+
+
+@keyframes introButtonShine {
+
+    0%,
+    55% {
+
+        left: -80%;
+
+    }
+
+    75%,
+    100% {
+
+        left: 130%;
+
+    }
+
+}
+
+
+@keyframes introParticleFloat {
+
+    0% {
+
+        opacity: 0;
+
+        transform:
+            translate3d(0, 30px, 0)
+            scale(.7);
+
+    }
+
+    20% {
+
+        opacity: .8;
+
+    }
+
+    50% {
+
+        opacity: 1;
+
+        transform:
+            translate3d(
+                var(--move-x, 20px),
+                -35px,
+                0
+            )
+            scale(1);
+
+    }
+
+    80% {
+
+        opacity: .5;
+
+    }
+
+    100% {
+
+        opacity: 0;
+
+        transform:
+            translate3d(
+                var(--move-x, -20px),
+                -90px,
+                0
+            )
+            scale(.6);
+
+    }
+
+}
+
+
+@keyframes introExit {
+
+    0% {
+
+        opacity: 1;
+
+        transform:
+            scale(1);
+
+        filter:
+            blur(0);
+
+    }
+
+    100% {
+
+        opacity: 0;
+
+        transform:
+            scale(1.08);
+
+        filter:
+            blur(14px);
+
+    }
+
+}
+
+
+/* =========================================================
+   17. MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .intro::before {
+
+        background-size:
+            38px 38px;
+
+        transform:
+            perspective(500px)
+            rotateX(58deg)
+            translateY(22%);
+
+    }
+
+
+    .intro-orb {
+
+        width: 86px;
+        height: 86px;
+
+        margin-bottom: 25px;
+
+    }
+
+
+    .intro-title {
+
+        letter-spacing:
+            -2.5px;
+
+    }
+
+
+    .intro-subtitle {
+
+        max-width: 330px;
+
+        font-size: 12px;
+
+        line-height: 1.75;
+
+    }
+
+
+    .intro-button {
+
+        width:
+            min(250px, 90%);
+
+        margin-top: 27px;
+
+    }
+
+
+    .intro-hud {
+
+        font-size: 6px;
+
+    }
+
+
+    .intro-hud.top-left,
+    .intro-hud.bottom-left {
+
+        left: 14px;
+
+    }
+
+
+    .intro-hud.top-right,
+    .intro-hud.bottom-right {
+
+        right: 14px;
+
+    }
+
+}
+
+
+/* =========================================================
+   18. REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .intro-orb,
+    .intro-orb::after,
+    .intro-button::before,
+    .intro-particle {
+
+        animation:
+            none;
+
+    }
+
+}

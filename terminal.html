@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#020603"
+    >
+
+    <title>Memory Terminal</title>
+
+    <link
+        rel="stylesheet"
+        href="css/global.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/terminal.css"
+    >
+
+</head>
+
+
+<body>
+
+    <main
+        class="terminal-page"
+        id="terminalPage"
+    >
+
+        <div class="terminal-container">
+
+            <!-- =========================================
+                 TERMINAL WINDOW
+                 ========================================= -->
+
+            <section class="terminal-window">
+
+
+                <!-- TERMINAL HEADER -->
+
+                <header class="terminal-header">
+
+                    <div class="terminal-dots">
+
+                        <span></span>
+                        <span></span>
+                        <span></span>
+
+                    </div>
+
+                    <span class="terminal-title">
+                        memory_terminal
+                    </span>
+
+                    <span class="terminal-status">
+                        ONLINE
+                    </span>
+
+                </header>
+
+
+                <!-- TERMINAL BODY -->
+
+                <div
+                    class="terminal-body"
+                    id="terminalOutput"
+                    aria-live="polite"
+                ></div>
+
+
+                <!-- CURSOR -->
+
+                <div
+                    class="terminal-cursor"
+                    id="terminalCursor"
+                    aria-hidden="true"
+                >
+                    _
+                </div>
+
+
+            </section>
+
+
+            <!-- =========================================
+                 CONTINUE
+                 ========================================= -->
+
+            <button
+                class="terminal-continue"
+                id="terminalContinue"
+                type="button"
+            >
+
+                Open the next memory
+
+                <span aria-hidden="true">
+                    →
+                </span>
+
+            </button>
+
+
+        </div>
+
+
+        <!-- =============================================
+             HUD
+             ============================================= -->
+
+        <div
+            class="intro-hud top-left"
+            aria-hidden="true"
+        >
+            MEMORY // 04
+        </div>
+
+
+        <div
+            class="intro-hud top-right"
+            aria-hidden="true"
+        >
+            TERMINAL ONLINE
+        </div>
+
+
+        <div
+            class="intro-hud bottom-left"
+            aria-hidden="true"
+        >
+            SYSTEM // READY
+        </div>
+
+
+        <div
+            class="intro-hud bottom-right"
+            aria-hidden="true"
+        >
+            04 / 06
+        </div>
+
+    </main>
+
+
+    <script
+        src="js/terminal.js"
+        defer
+    ></script>
+
+</body>
+
+</html>

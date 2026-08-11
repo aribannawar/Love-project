@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- =====================================================
+         BASIC DOCUMENT SETTINGS
+         ===================================================== -->
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#02030a"
+    >
+
+    <meta
+        name="description"
+        content="A special interactive experience."
+    >
+
+    <title>A Little Surprise ✨</title>
+
+
+    <!-- =====================================================
+         GLOBAL CSS
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/global.css"
+    >
+
+    <!-- =====================================================
+         INTRO CSS
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/intro.css"
+    >
+
+    <link
+    rel="stylesheet"
+    href="css/heart.css"
+>
+
+
+       <!-- =====================================================
+                     CONSTELLATION EXPERIENCE
+        ===================================================== -->
+
+    <link
+    rel="stylesheet"
+    href="css/constellation.css"
+>
+
+</head>
+
+
+<body>
+
+    <!-- =====================================================
+         MAIN APPLICATION
+         ===================================================== -->
+
+    <main id="app">
+
+
+        <!-- =================================================
+             INTRO / OPENING EXPERIENCE
+             ================================================= -->
+
+        <section
+            class="intro"
+            id="intro"
+            aria-label="Introduction"
+        >
+
+
+            <!-- =============================================
+                 AMBIENT PARTICLES
+                 Generated later by intro.js
+                 ============================================= -->
+
+            <div
+                class="intro-particles"
+                id="introParticles"
+                aria-hidden="true"
+            ></div>
+
+
+            <!-- =============================================
+                 TOP LEFT HUD
+                 ============================================= -->
+
+            <div
+                class="intro-hud top-left"
+                aria-hidden="true"
+            >
+                SURPRISE // 001
+            </div>
+
+
+            <!-- =============================================
+                 TOP RIGHT HUD
+                 ============================================= -->
+
+            <div
+                class="intro-hud top-right"
+                aria-hidden="true"
+            >
+                SYSTEM ONLINE
+            </div>
+
+
+            <!-- =============================================
+                 MAIN INTRO CONTENT
+                 ============================================= -->
+
+            <div class="intro-content">
+
+
+     <!-- =====================================================
+               FIRE / ENERGY HOLOGRAPHIC HEART
+     ===================================================== -->
+
+<div
+    class="hero-visual"
+    aria-hidden="true"
+>
+
+    <svg
+        class="fire-heart"
+        viewBox="0 0 300 280"
+        xmlns="http://www.w3.org/2000/svg"
+    >
+
+        <defs>
+
+            <!-- =========================================
+                 ANIMATED FIRE GRADIENT
+                 ========================================= -->
+
+            <linearGradient
+                id="fireHeartGradient"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="100%"
+            >
+
+                <stop
+                    offset="0%"
+                    stop-color="#54f7ff"
+                />
+
+                <stop
+                    offset="35%"
+                    stop-color="#697cff"
+                />
+
+                <stop
+                    offset="65%"
+                    stop-color="#c95cff"
+                />
+
+                <stop
+                    offset="100%"
+                    stop-color="#ff5ccf"
+                />
+
+            </linearGradient>
+
+
+            <!-- =========================================
+                 FIRE DISTORTION
+                 ========================================= -->
+
+            <filter
+                id="fireDistortion"
+                x="-80%"
+                y="-80%"
+                width="260%"
+                height="260%"
+            >
+
+                <feTurbulence
+                    type="fractalNoise"
+                    baseFrequency="0.025 0.09"
+                    numOctaves="3"
+                    seed="8"
+                    result="noise"
+                >
+
+                    <animate
+                        attributeName="baseFrequency"
+                        values="
+                            0.025 0.09;
+                            0.035 0.12;
+                            0.02 0.075;
+                            0.025 0.09
+                        "
+                        dur="2.2s"
+                        repeatCount="indefinite"
+                    />
+
+                </feTurbulence>
+
+
+                <feDisplacementMap
+                    in="SourceGraphic"
+                    in2="noise"
+                    scale="12"
+                    xChannelSelector="R"
+                    yChannelSelector="G"
+                />
+
+            </filter>
+
+
+            <!-- =========================================
+                 SOFT OUTER GLOW
+                 ========================================= -->
+
+            <filter
+                id="fireGlow"
+                x="-100%"
+                y="-100%"
+                width="300%"
+                height="300%"
+            >
+
+                <feGaussianBlur
+                    stdDeviation="9"
+                    result="blur"
+                />
+
+                <feMerge>
+
+                    <feMergeNode
+                        in="blur"
+                    />
+
+                    <feMergeNode
+                        in="SourceGraphic"
+                    />
+
+                </feMerge>
+
+            </filter>
+
+
+            <!-- =========================================
+                 CORE GLOW
+                 ========================================= -->
+
+            <radialGradient
+                id="heartCore"
+            >
+
+                <stop
+                    offset="0%"
+                    stop-color="#ffffff"
+                    stop-opacity="0.95"
+                />
+
+                <stop
+                    offset="25%"
+                    stop-color="#bdfcff"
+                    stop-opacity="0.65"
+                />
+
+                <stop
+                    offset="60%"
+                    stop-color="#8b63ff"
+                    stop-opacity="0.25"
+                />
+
+                <stop
+                    offset="100%"
+                    stop-color="#ff5ccc"
+                    stop-opacity="0"
+                />
+
+            </radialGradient>
+
+        </defs>
+
+
+        <!-- =============================================
+             HUGE ATMOSPHERIC FIRE GLOW
+             ============================================= -->
+
+        <path
+            class="fire-heart-aura"
+            d="
+                M150 250
+                L38 138
+                C-8 92 20 28 78 28
+                C112 28 137 46 150 73
+                C163 46 188 28 222 28
+                C280 28 308 92 262 138
+                Z
+            "
+        />
+
+
+        <!-- =============================================
+             DISTORTED FIRE BODY
+             ============================================= -->
+
+        <path
+            class="fire-heart-body"
+            d="
+                M150 250
+                L38 138
+                C-8 92 20 28 78 28
+                C112 28 137 46 150 73
+                C163 46 188 28 222 28
+                C280 28 308 92 262 138
+                Z
+            "
+        />
+
+
+        <!-- =============================================
+             BRIGHT INNER ENERGY
+             ============================================= -->
+
+        <path
+            class="fire-heart-inner"
+            d="
+                M150 239
+                L48 136
+                C15 101 35 45 80 45
+                C111 45 136 64 150 91
+                C164 64 189 45 220 45
+                C265 45 285 101 252 136
+                Z
+            "
+        />
+
+
+        <!-- =============================================
+             LUMINOUS CORE
+             ============================================= -->
+
+        <ellipse
+            class="fire-heart-core"
+            cx="150"
+            cy="145"
+            rx="80"
+            ry="76"
+        />
+
+    </svg>
+
+
+    <!-- =============================================
+         FIRE SPARK PARTICLES
+         ============================================= -->
+
+    <span class="fire-spark spark-1"></span>
+    <span class="fire-spark spark-2"></span>
+    <span class="fire-spark spark-3"></span>
+    <span class="fire-spark spark-4"></span>
+    <span class="fire-spark spark-5"></span>
+    <span class="fire-spark spark-6"></span>
+    <span class="fire-spark spark-7"></span>
+    <span class="fire-spark spark-8"></span>
+
+
+    <!-- =============================================
+         SURROUNDING HOLOGRAPHIC STARS
+         ============================================= -->
+
+    <span class="heart-star star-1"></span>
+    <span class="heart-star star-2"></span>
+    <span class="heart-star star-3"></span>
+    <span class="heart-star star-4"></span>
+    <span class="heart-star star-5"></span>
+    <span class="heart-star star-6"></span>
+
+</div>
+
+
+
+                <!-- =========================================
+                     SMALL LABEL
+                     ========================================= -->
+
+                <span class="intro-label">
+                    A PERSONAL EXPERIENCE
+                </span>
+
+
+                <!-- =========================================
+                     MAIN TITLE
+                     ========================================= -->
+
+                <h1 class="intro-title">
+
+                    Something
+
+                    <span class="accent">
+                        Special
+                    </span>
+
+                </h1>
+
+
+                <!-- =========================================
+                     SUBTITLE
+                     ========================================= -->
+
+                <p class="intro-subtitle">
+
+                    I built something for you.
+
+                    <br>
+
+                    Take your time and discover
+                    every part of it.
+
+                </p>
+
+
+                <!-- =========================================
+                     START BUTTON
+                     ========================================= -->
+
+                <button
+                    class="intro-button"
+                    id="beginExperience"
+                    type="button"
+                >
+
+                    <span>
+                        Begin the experience
+                    </span>
+
+                    <span
+                        class="arrow"
+                        aria-hidden="true"
+                    >
+                        →
+                    </span>
+
+                </button>
+
+
+                <!-- =========================================
+                     MICRO INFORMATION
+                     ========================================= -->
+
+                <span class="intro-micro">
+
+                    Best experienced with sound
+
+                </span>
+
+
+            </div>
+
+
+            <!-- =============================================
+                 BOTTOM LEFT HUD
+                 ============================================= -->
+
+            <div
+                class="intro-hud bottom-left"
+                aria-hidden="true"
+            >
+                CYBER // MEMORY
+            </div>
+
+
+            <!-- =============================================
+                 BOTTOM RIGHT HUD
+                 ============================================= -->
+
+            <div
+                class="intro-hud bottom-right"
+                aria-hidden="true"
+            >
+                01 / 06
+            </div>
+
+
+        </section>
+
+
+       <!-- =====================================================
+     CONSTELLATION EXPERIENCE
+     ===================================================== -->
+
+
+<section
+    class="constellation"
+    id="constellation"
+    aria-label="Animated constellation"
+>
+
+    <!-- ================================================
+         STAR FIELD
+         Generated dynamically by constellation.js
+         ================================================ -->
+
+    <div
+        class="constellation-stars"
+        id="constellationStars"
+        aria-hidden="true"
+    ></div>
+
+
+    <!-- ================================================
+         CONSTELLATION SVG
+         JavaScript will draw the constellation here
+         ================================================ -->
+
+    <svg
+        class="constellation-canvas"
+        id="constellationCanvas"
+        viewBox="0 0 1000 700"
+        preserveAspectRatio="xMidYMid slice"
+        aria-hidden="true"
+    >
+
+        <!--
+            Lines and nodes will be generated
+            dynamically by constellation.js.
+        -->
+
+    </svg>
+
+
+    <!-- ================================================
+         CENTRAL CONSTELLATION LIGHT
+         ================================================ -->
+
+    <div
+        class="constellation-core"
+        id="constellationCore"
+        aria-hidden="true"
+    ></div>
+
+
+    <!-- ================================================
+         CONSTELLATION TEXT
+         ================================================ -->
+
+    <div class="constellation-content">
+
+        <span class="constellation-label">
+            MEMORY // CONSTELLATION
+        </span>
+
+
+        <h2 class="constellation-title">
+            Written in the stars
+        </h2>
+
+
+        <p class="constellation-message">
+
+            Some memories deserve more than
+            a photograph.
+
+            <br>
+
+            They deserve their own constellation.
+
+        </p>
+
+
+        <button
+            class="btn btn-primary constellation-continue"
+            id="constellationContinue"
+            type="button"
+        >
+
+            <span>
+                Discover what comes next
+            </span>
+
+            <span aria-hidden="true">
+                →
+            </span>
+
+        </button>
+
+    </div>
+
+
+    <!-- ================================================
+         SMALL HUD INFORMATION
+         ================================================ -->
+
+    <div
+        class="intro-hud top-left"
+        aria-hidden="true"
+    >
+        MEMORY // 02
+    </div>
+
+
+    <div
+        class="intro-hud top-right"
+        aria-hidden="true"
+    >
+        CONSTELLATION ONLINE
+    </div>
+
+
+    <div
+        class="intro-hud bottom-left"
+        aria-hidden="true"
+    >
+        SIGNAL // STABLE
+    </div>
+
+
+    <div
+        class="intro-hud bottom-right"
+        aria-hidden="true"
+    >
+        02 / 06
+    </div>
+
+</section>
+
+
+
+        <!-- =================================================
+             FUTURE SECTIONS
+             
+             We will build these one by one.
+             They are intentionally empty for now.
+             ================================================= -->
+
+
+        <!--
+        <section
+            id="constellation"
+            class="constellation"
+        >
+        </section>
+        -->
+
+
+        <!--
+        <section
+            id="puzzle"
+            class="puzzle"
+        >
+        </section>
+        -->
+
+
+        <!--
+        <section
+            id="terminal"
+            class="terminal"
+        >
+        </section>
+        -->
+
+
+        <!--
+        <section
+            id="book"
+            class="book"
+        >
+        </section>
+        -->
+
+
+        <!--
+        <section
+            id="photoCard"
+            class="photo-card"
+        >
+        </section>
+        -->
+
+
+    </main>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+         
+         We will create intro.js next.
+         ===================================================== -->
+
+<script src="js/constellation.js" defer></script>
+<script src="js/intro.js" defer></script>
+
+</body>
+
+</html>
+,

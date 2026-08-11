@@ -1,0 +1,508 @@
+/* =========================================================
+   SURPRISE PROJECT
+   TERMINAL MEMORY EXPERIENCE
+   ========================================================= */
+
+.terminal-page {
+
+    position: relative;
+
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100svh;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    padding: 30px 16px;
+
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(0, 255, 150, 0.055),
+            transparent 40%
+        ),
+        #010402;
+
+}
+
+
+/* =========================================================
+   SCANLINES
+   ========================================================= */
+
+.terminal-page::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0.018),
+            rgba(255, 255, 255, 0.018) 1px,
+            transparent 1px,
+            transparent 4px
+        );
+
+    opacity: 0.5;
+
+}
+
+
+/* =========================================================
+   TERMINAL CONTAINER
+   ========================================================= */
+
+.terminal-container {
+
+    position: relative;
+
+    z-index: 5;
+
+    width:
+        min(900px, 100%);
+
+}
+
+
+/* =========================================================
+   TERMINAL WINDOW
+   ========================================================= */
+
+.terminal-window {
+
+    overflow: hidden;
+
+    border:
+        1px solid
+        rgba(0, 255, 150, 0.22);
+
+    border-radius:
+        16px;
+
+    background:
+        rgba(0, 10, 6, 0.88);
+
+    box-shadow:
+        0 0 50px
+        rgba(0, 255, 150, 0.07);
+
+    backdrop-filter:
+        blur(16px);
+
+    -webkit-backdrop-filter:
+        blur(16px);
+
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.terminal-header {
+
+    height: 44px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding:
+        0 16px;
+
+    border-bottom:
+        1px solid
+        rgba(0, 255, 150, 0.13);
+
+    background:
+        rgba(0, 255, 150, 0.025);
+
+}
+
+
+.terminal-dots {
+
+    display: flex;
+
+    gap: 6px;
+
+}
+
+
+.terminal-dots span {
+
+    width: 9px;
+    height: 9px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 255, 255, 0.35);
+
+}
+
+
+.terminal-dots span:first-child {
+
+    background:
+        #ff5f57;
+
+}
+
+
+.terminal-dots span:nth-child(2) {
+
+    background:
+        #febc2e;
+
+}
+
+
+.terminal-dots span:nth-child(3) {
+
+    background:
+        #28c840;
+
+}
+
+
+.terminal-title {
+
+    flex: 1;
+
+    color:
+        rgba(255, 255, 255, 0.55);
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-size: 11px;
+
+}
+
+
+.terminal-status {
+
+    color:
+        #39ff9a;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+}
+
+
+/* =========================================================
+   TERMINAL BODY
+   ========================================================= */
+
+.terminal-body {
+
+    min-height:
+        clamp(390px, 58vh, 560px);
+
+    padding:
+        clamp(20px, 4vw, 35px);
+
+    overflow: auto;
+
+    color:
+        #8affc5;
+
+    font-family:
+        "Courier New",
+        Courier,
+        monospace;
+
+    font-size:
+        clamp(11px, 2vw, 14px);
+
+    line-height:
+        1.85;
+
+    white-space:
+        pre-wrap;
+
+}
+
+
+/* =========================================================
+   TERMINAL LINES
+   ========================================================= */
+
+.terminal-line {
+
+    opacity: 0;
+
+    animation:
+        terminalLineIn
+        0.35s
+        ease
+        forwards;
+
+}
+
+
+.terminal-command {
+
+    color:
+        #39ff9a;
+
+}
+
+
+.terminal-muted {
+
+    color:
+        rgba(138, 255, 197, 0.45);
+
+}
+
+
+.terminal-highlight {
+
+    color:
+        #ffffff;
+
+}
+
+
+.terminal-heart {
+
+    color:
+        #ff6fa8;
+
+    text-shadow:
+        0 0 12px
+        rgba(255, 111, 168, 0.45);
+
+}
+
+
+/* =========================================================
+   CURSOR
+   ========================================================= */
+
+.terminal-cursor {
+
+    display: inline-block;
+
+    margin-left: 35px;
+
+    color:
+        #39ff9a;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    animation:
+        terminalBlink
+        0.8s
+        steps(1)
+        infinite;
+
+}
+
+
+/* =========================================================
+   CONTINUE BUTTON
+   ========================================================= */
+
+.terminal-continue {
+
+    display: block;
+
+    margin:
+        24px auto 0;
+
+    padding:
+        13px 20px;
+
+    border:
+        1px solid
+        rgba(0, 255, 150, 0.35);
+
+    border-radius:
+        10px;
+
+    color:
+        #39ff9a;
+
+    background:
+        rgba(0, 255, 150, 0.05);
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-size:
+        11px;
+
+    cursor: pointer;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transform:
+        translateY(10px);
+
+    transition:
+        opacity 0.4s ease,
+        transform 0.4s ease,
+        background 0.25s ease;
+
+}
+
+
+.terminal-continue.visible {
+
+    opacity: 1;
+
+    pointer-events: auto;
+
+    transform:
+        translateY(0);
+
+}
+
+
+.terminal-continue:hover {
+
+    background:
+        rgba(0, 255, 150, 0.12);
+
+}
+
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes terminalLineIn {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(5px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+
+@keyframes terminalBlink {
+
+    0%,
+    45% {
+
+        opacity: 1;
+
+    }
+
+    46%,
+    100% {
+
+        opacity: 0;
+
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .terminal-page {
+
+        padding:
+            18px 10px;
+
+    }
+
+
+    .terminal-window {
+
+        border-radius:
+            12px;
+
+    }
+
+
+    .terminal-body {
+
+        min-height:
+            420px;
+
+        padding:
+            18px 14px;
+
+    }
+
+
+    .terminal-header {
+
+        padding:
+            0 11px;
+
+    }
+
+
+    .terminal-status {
+
+        display:
+            none;
+
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .terminal-line,
+    .terminal-cursor {
+
+        animation: none;
+
+    }
+
+}

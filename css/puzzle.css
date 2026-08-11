@@ -1,0 +1,834 @@
+/* =========================================================
+   SURPRISE PROJECT
+   BIG INTERACTIVE PUZZLE
+   ========================================================= */
+
+.puzzle {
+
+    position: relative;
+
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100svh;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    isolation: isolate;
+
+    padding: 60px 0;
+
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(77, 234, 255, 0.07),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 80% 80%,
+            rgba(255, 95, 162, 0.07),
+            transparent 28%
+        ),
+        #02030a;
+
+}
+
+
+/* =========================================================
+   BACKGROUND GRID
+   ========================================================= */
+
+.puzzle::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: -3;
+
+    background-image:
+        linear-gradient(
+            rgba(139, 92, 246, 0.035) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(139, 92, 246, 0.035) 1px,
+            transparent 1px
+        );
+
+    background-size:
+        45px 45px;
+
+    mask-image:
+        radial-gradient(
+            circle,
+            black 10%,
+            transparent 80%
+        );
+
+}
+
+
+/* =========================================================
+   AMBIENT GLOW
+   ========================================================= */
+
+.puzzle::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 500px;
+    height: 500px;
+
+    top: 50%;
+    left: 50%;
+
+    z-index: -2;
+
+    border-radius: 50%;
+
+    background:
+        rgba(139, 92, 246, 0.06);
+
+    filter:
+        blur(100px);
+
+    transform:
+        translate(-50%, -50%);
+
+}
+
+
+/* =========================================================
+   MAIN CONTAINER
+   ========================================================= */
+
+.puzzle-container {
+
+    position: relative;
+
+    width:
+        min(650px, calc(100% - 32px));
+
+    z-index: 10;
+
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.puzzle-header {
+
+    text-align: center;
+
+    margin-bottom: 32px;
+
+}
+
+
+.puzzle-label {
+
+    display: block;
+
+    margin-bottom: 12px;
+
+    color:
+        var(--cyan);
+
+    font-size: 9px;
+
+    font-weight: 900;
+
+    letter-spacing: 4px;
+
+    text-transform: uppercase;
+
+}
+
+
+.puzzle-title {
+
+    margin: 0;
+
+    color:
+        var(--text-primary);
+
+    font-size:
+        clamp(30px, 7vw, 58px);
+
+    line-height: 1;
+
+    font-weight: 900;
+
+    letter-spacing:
+        -2px;
+
+}
+
+
+.puzzle-subtitle {
+
+    max-width: 450px;
+
+    margin:
+        15px auto 0;
+
+    color:
+        var(--text-secondary);
+
+    font-size: 13px;
+
+    line-height: 1.7;
+
+}
+
+
+/* =========================================================
+   PROGRESS
+   ========================================================= */
+
+.puzzle-progress {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 18px;
+
+}
+
+
+.puzzle-progress-track {
+
+    flex: 1;
+
+    height: 4px;
+
+    overflow: hidden;
+
+    border-radius: 99px;
+
+    background:
+        rgba(255, 255, 255, 0.07);
+
+}
+
+
+.puzzle-progress-bar {
+
+    width: 0%;
+
+    height: 100%;
+
+    border-radius: inherit;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--cyan),
+            var(--accent),
+            var(--pink)
+        );
+
+    transition:
+        width 0.6s ease;
+
+}
+
+
+.puzzle-progress-text {
+
+    min-width: 55px;
+
+    color:
+        var(--text-muted);
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-size: 9px;
+
+    text-align: right;
+
+}
+
+
+/* =========================================================
+   PUZZLE CARD
+   ========================================================= */
+
+.puzzle-card {
+
+    position: relative;
+
+    padding:
+        clamp(22px, 5vw, 38px);
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:
+        var(--radius-large);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.055),
+            rgba(255, 255, 255, 0.015)
+        );
+
+    backdrop-filter:
+        blur(20px);
+
+    -webkit-backdrop-filter:
+        blur(20px);
+
+    box-shadow:
+        var(--shadow-large);
+
+}
+
+
+/* =========================================================
+   QUESTION NUMBER
+   ========================================================= */
+
+.puzzle-number {
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 38px;
+    height: 38px;
+
+    margin-bottom: 20px;
+
+    border-radius: 12px;
+
+    color:
+        var(--cyan);
+
+    background:
+        var(--cyan-soft);
+
+    border:
+        1px solid
+        rgba(77, 234, 255, 0.18);
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-size: 12px;
+
+    font-weight: 900;
+
+}
+
+
+/* =========================================================
+   QUESTION
+   ========================================================= */
+
+.puzzle-question {
+
+    margin-bottom: 25px;
+
+    color:
+        var(--text-primary);
+
+    font-size:
+        clamp(18px, 4vw, 25px);
+
+    line-height: 1.4;
+
+    font-weight: 800;
+
+}
+
+
+/* =========================================================
+   ANSWER GRID
+   ========================================================= */
+
+.puzzle-answers {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 12px;
+
+}
+
+
+/* =========================================================
+   ANSWER BUTTON
+   ========================================================= */
+
+.puzzle-answer {
+
+    position: relative;
+
+    min-height: 58px;
+
+    padding:
+        14px 16px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.09);
+
+    border-radius:
+        14px;
+
+    color:
+        var(--text-secondary);
+
+    background:
+        rgba(255, 255, 255, 0.025);
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        border-color 0.25s ease,
+        color 0.25s ease;
+
+}
+
+
+.puzzle-answer:hover {
+
+    transform:
+        translateY(-3px);
+
+    color:
+        #ffffff;
+
+    border-color:
+        rgba(139, 92, 246, 0.45);
+
+    background:
+        rgba(139, 92, 246, 0.09);
+
+}
+
+
+.puzzle-answer:active {
+
+    transform:
+        translateY(0);
+
+}
+
+
+/* =========================================================
+   CORRECT ANSWER
+   ========================================================= */
+
+.puzzle-answer.correct {
+
+    color:
+        #ffffff;
+
+    border-color:
+        rgba(77, 234, 255, 0.65);
+
+    background:
+        rgba(77, 234, 255, 0.10);
+
+    box-shadow:
+        0 0 25px
+        rgba(77, 234, 255, 0.10);
+
+}
+
+
+/* =========================================================
+   WRONG ANSWER
+   ========================================================= */
+
+.puzzle-answer.wrong {
+
+    color:
+        #ff9aba;
+
+    border-color:
+        rgba(255, 95, 162, 0.55);
+
+    background:
+        rgba(255, 95, 162, 0.08);
+
+    animation:
+        puzzleShake
+        0.35s
+        ease;
+
+}
+
+
+/* =========================================================
+   FEEDBACK
+   ========================================================= */
+
+.puzzle-feedback {
+
+    min-height: 24px;
+
+    margin-top: 20px;
+
+    color:
+        var(--text-secondary);
+
+    font-size: 12px;
+
+    line-height: 1.6;
+
+}
+
+
+.puzzle-feedback.success {
+
+    color:
+        var(--cyan);
+
+}
+
+
+.puzzle-feedback.error {
+
+    color:
+        var(--pink);
+
+}
+
+
+/* =========================================================
+   NEXT BUTTON
+   ========================================================= */
+
+.puzzle-next {
+
+    margin-top: 22px;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+}
+
+
+.puzzle-next.visible {
+
+    opacity: 1;
+
+    pointer-events: auto;
+
+}
+
+
+/* =========================================================
+   COMPLETION STATE
+   ========================================================= */
+
+.puzzle-complete {
+
+    display: none;
+
+    text-align: center;
+
+}
+
+
+.puzzle-complete.visible {
+
+    display: block;
+
+    animation:
+        puzzleReveal
+        0.8s
+        ease
+        forwards;
+
+}
+
+
+.puzzle-complete-icon {
+
+    width: 72px;
+    height: 72px;
+
+    margin:
+        0 auto 20px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    color:
+        #ffffff;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(139, 92, 246, 0.35),
+            rgba(139, 92, 246, 0.08)
+        );
+
+    box-shadow:
+        0 0 45px
+        rgba(139, 92, 246, 0.20);
+
+    font-size: 26px;
+
+}
+
+
+.puzzle-complete-title {
+
+    color:
+        #ffffff;
+
+    font-size:
+        clamp(25px, 6vw, 42px);
+
+    font-weight: 900;
+
+}
+
+
+.puzzle-complete-message {
+
+    max-width: 430px;
+
+    margin:
+        15px auto 0;
+
+    color:
+        var(--text-secondary);
+
+    font-size: 13px;
+
+    line-height: 1.8;
+
+}
+
+
+/* =========================================================
+   TRANSITION STATE
+   ========================================================= */
+
+.puzzle.is-entering {
+
+    animation:
+        puzzleEnter
+        1s
+        cubic-bezier(.2, .8, .2, 1)
+        forwards;
+
+}
+
+
+.puzzle.is-exiting {
+
+    pointer-events: none;
+
+    animation:
+        puzzleExit
+        0.9s
+        cubic-bezier(.7, 0, .2, 1)
+        forwards;
+
+}
+
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes puzzleEnter {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(35px)
+            scale(0.97);
+
+        filter:
+            blur(8px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+        filter:
+            blur(0);
+
+    }
+
+}
+
+
+@keyframes puzzleExit {
+
+    from {
+
+        opacity: 1;
+
+        transform:
+            scale(1);
+
+        filter:
+            blur(0);
+
+    }
+
+    to {
+
+        opacity: 0;
+
+        transform:
+            scale(1.05);
+
+        filter:
+            blur(12px);
+
+    }
+
+}
+
+
+@keyframes puzzleShake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-6px);
+    }
+
+    50% {
+        transform: translateX(6px);
+    }
+
+    75% {
+        transform: translateX(-4px);
+    }
+
+}
+
+
+@keyframes puzzleReveal {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(18px)
+            scale(0.97);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .puzzle {
+
+        padding:
+            45px 0;
+
+    }
+
+
+    .puzzle-answers {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .puzzle-card {
+
+        padding:
+            22px 18px;
+
+    }
+
+
+    .puzzle-question {
+
+        font-size: 19px;
+
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .puzzle,
+    .puzzle-answer,
+    .puzzle-complete.visible {
+
+        animation: none;
+
+    }
+
+}

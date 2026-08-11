@@ -1,0 +1,481 @@
+/* =========================================================
+   SURPRISE PROJECT
+   ANIMATED CONSTELLATION
+   ========================================================= */
+
+.constellation {
+
+    position: relative;
+
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100svh;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    isolation: isolate;
+
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(77, 234, 255, 0.07),
+            transparent 24%
+        ),
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(139, 92, 246, 0.10),
+            transparent 48%
+        ),
+        #010208;
+
+}
+
+
+/* =========================================================
+   STAR FIELD
+   ========================================================= */
+
+.constellation-stars {
+
+    position: absolute;
+
+    inset: 0;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+}
+
+
+.constellation-star {
+
+    position: absolute;
+
+    width: 2px;
+    height: 2px;
+
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 0 7px rgba(255, 255, 255, 0.8);
+
+    opacity: 0;
+
+    animation:
+        constellationTwinkle
+        var(--star-duration, 4s)
+        ease-in-out
+        infinite;
+
+    animation-delay:
+        var(--star-delay, 0s);
+
+}
+
+
+/* =========================================================
+   CONSTELLATION CANVAS
+   ========================================================= */
+
+.constellation-canvas {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 2;
+
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.constellation-content {
+
+    position: relative;
+
+    z-index: 10;
+
+    width:
+        min(650px, calc(100% - 32px));
+
+    text-align: center;
+
+    pointer-events: none;
+
+}
+
+
+/* =========================================================
+   SMALL LABEL
+   ========================================================= */
+
+.constellation-label {
+
+    display: block;
+
+    margin-bottom: 18px;
+
+    color:
+        var(--cyan);
+
+    font-size: 9px;
+
+    font-weight: 900;
+
+    letter-spacing: 4px;
+
+    text-transform: uppercase;
+
+    opacity: 0;
+
+}
+
+
+/* =========================================================
+   MAIN MESSAGE
+   ========================================================= */
+
+.constellation-title {
+
+    margin: 0;
+
+    color:
+        #ffffff;
+
+    font-size:
+        clamp(30px, 8vw, 66px);
+
+    line-height: 1;
+
+    font-weight: 900;
+
+    letter-spacing:
+        -2px;
+
+    text-shadow:
+        0 0 30px
+        rgba(139, 92, 246, 0.22);
+
+    opacity: 0;
+
+}
+
+
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
+
+.constellation-message {
+
+    max-width: 450px;
+
+    margin:
+        20px auto 0;
+
+    color:
+        var(--text-secondary);
+
+    font-size:
+        clamp(12px, 2.8vw, 15px);
+
+    line-height: 1.8;
+
+    opacity: 0;
+
+}
+
+
+/* =========================================================
+   CONTINUE BUTTON
+   ========================================================= */
+
+.constellation-continue {
+
+    margin-top: 28px;
+
+    opacity: 0;
+
+    pointer-events: auto;
+
+}
+
+
+/* =========================================================
+   CONSTELLATION CORE
+   ========================================================= */
+
+.constellation-core {
+
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    width: 12px;
+    height: 12px;
+
+    z-index: 4;
+
+    border-radius: 50%;
+
+    background:
+        #ffffff;
+
+    box-shadow:
+        0 0 12px #ffffff,
+        0 0 35px rgba(77, 234, 255, 0.75),
+        0 0 80px rgba(139, 92, 246, 0.5);
+
+    transform:
+        translate(-50%, -50%)
+        scale(0);
+
+    opacity: 0;
+
+}
+
+
+/* =========================================================
+   CORE PULSE
+   ========================================================= */
+
+.constellation-core::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: -20px;
+
+    border:
+        1px solid
+        rgba(77, 234, 255, 0.25);
+
+    border-radius: 50%;
+
+    animation:
+        constellationPulse
+        2.5s
+        ease-out
+        infinite;
+
+}
+
+
+/* =========================================================
+   LINE GLOW
+   ========================================================= */
+
+.constellation-line {
+
+    fill: none;
+
+    stroke:
+        rgba(139, 92, 246, 0.55);
+
+    stroke-width:
+        1.2;
+
+    stroke-linecap:
+        round;
+
+    stroke-dasharray:
+        1000;
+
+    stroke-dashoffset:
+        1000;
+
+    filter:
+        drop-shadow(
+            0 0 5px
+            rgba(139, 92, 246, 0.55)
+        );
+
+}
+
+
+/* =========================================================
+   CONSTELLATION NODES
+   ========================================================= */
+
+.constellation-node {
+
+    fill:
+        #ffffff;
+
+    filter:
+        drop-shadow(
+            0 0 6px
+            rgba(77, 234, 255, 0.8)
+        );
+
+    opacity: 0;
+
+}
+
+
+/* =========================================================
+   REVEAL STATES
+   Controlled by constellation.js
+   ========================================================= */
+
+.constellation.is-active
+.constellation-label {
+
+    animation:
+        constellationFadeUp
+        0.8s
+        ease
+        forwards;
+
+}
+
+
+.constellation.is-active
+.constellation-title {
+
+    animation:
+        constellationFadeUp
+        1s
+        0.8s
+        ease
+        forwards;
+
+}
+
+
+.constellation.is-active
+.constellation-message {
+
+    animation:
+        constellationFadeUp
+        1s
+        1.4s
+        ease
+        forwards;
+
+}
+
+
+.constellation.is-active
+.constellation-continue {
+
+    animation:
+        constellationFadeUp
+        0.8s
+        2s
+        ease
+        forwards;
+
+}
+
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes constellationTwinkle {
+
+    0%,
+    100% {
+
+        opacity: 0.15;
+
+        transform:
+            scale(0.7);
+
+    }
+
+    50% {
+
+        opacity: 1;
+
+        transform:
+            scale(1.7);
+
+    }
+
+}
+
+
+@keyframes constellationPulse {
+
+    0% {
+
+        opacity: 0.7;
+
+        transform:
+            scale(0.25);
+
+    }
+
+    100% {
+
+        opacity: 0;
+
+        transform:
+            scale(1.8);
+
+    }
+
+}
+
+
+@keyframes constellationFadeUp {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(20px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .constellation-title {
+
+        letter-spacing:
+            -1.5px;
+
+    }
+
+    .constellation-message {
+
+        max-width:
+            330px;
+
+    }
+
+}
