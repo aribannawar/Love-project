@@ -22,7 +22,7 @@ module.exports = async (req, res) => {
             process.cwd(),
             "love-letter",
             "public",
-            "email.html"
+            "index.html"
         );
 
         const emailHtml = fs.readFileSync(
